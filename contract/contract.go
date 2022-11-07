@@ -53,10 +53,20 @@ func GetBalance() {
 
 func ReceiverBalance(auth *bind.TransactOpts) {
 
-    balance, err := Mycontract.ReceiverBalance(auth)
+    transaction, err := Mycontract.ReceiverBalance(auth)
     if err != nil {
         log.Fatal(err)
     }
 
-    fmt.Println("Transaction Hash :", balance.Hash().Hex())
+    fmt.Println("Transaction Hash :", transaction.Hash().Hex())
+}
+
+func Signature(signer common.Address, to common.Address, amount *big.Int, message string, nonce *big.Int, signature []byte) {
+
+    res, err := Mycontract.Verify(nil, signer, to, amount, message, nonce, signature)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println("Transaction Hash :", res)
 }

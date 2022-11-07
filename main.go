@@ -2,11 +2,14 @@ package main
 
 import (
 	"fmt"
+	"math/big"
 
 	"bufio"
 	"os"
 	"servercoin/contract"
 	"servercoin/initstate"
+
+	"github.com/ethereum/go-ethereum/common"
 )
 
 var (
@@ -31,6 +34,15 @@ func handleChoice(choice int) {
 
 		initstate.SetValue(1e18)
 		contract.ReceiverBalance(initstate.Auth)
+	} else if choice == 5 {
+
+		initstate.SetValue(0)
+		signer := common.HexToAddress("0x9EB46ba1179259642706f03387ADC39470f64Cc8")
+		to := common.HexToAddress("0x9EB46ba1179259642706f03387ADC39470f64Cc8")
+		amount := *big.NewInt(1e18)
+		message := "oke"
+		signature := []byte("0x9EB46ba1179259642706f03387ADC39470f64Cc8")
+		contract.Signature(signer, to, &amount, message, initstate.Auth.Nonce, signature)
 	} else {
 
 		fmt.Println("Input Invalid!!! Please enter again.")
@@ -48,6 +60,7 @@ func main() {
 		fmt.Println("2 : Create New Contract.")
 		fmt.Println("3 : GetBalance Contract.")
 		fmt.Println("4 : Send ETH to Contract.")
+		fmt.Println("5 : Signature ETH to Contract.")
 		fmt.Fscan(in, &choice)
 		handleChoice(choice)
 		fmt.Println()

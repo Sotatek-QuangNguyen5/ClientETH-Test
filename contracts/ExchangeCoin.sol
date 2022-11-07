@@ -9,6 +9,12 @@ contract VerifySignature {
 
         creator = msg.sender;
     }
+
+    modifier Owner() {
+
+        require(msg.sender == creator, "Not authenzation!!!");
+        _;
+    }
     
     function getMessageHash(address _to, uint _amount, string memory _message, uint _nonce) public pure returns(bytes32) {
 
