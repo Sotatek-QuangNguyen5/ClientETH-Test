@@ -19,10 +19,10 @@ var (
 
 func handleChoice(choice int) {
 
-	initstate.SetNonce()
+	//initstate.SetNonce()
+	initstate.SetValue(0)
 	if choice == 1 {
 
-		initstate.SetValue(0)
 		contract.Deploy(initstate.Auth, initstate.Client)
 	} else if choice == 2 {
 
@@ -36,13 +36,13 @@ func handleChoice(choice int) {
 		contract.ReceiverBalance(initstate.Auth)
 	} else if choice == 5 {
 
-		initstate.SetValue(0)
-		signer := common.HexToAddress("0x9EB46ba1179259642706f03387ADC39470f64Cc8")
-		to := common.HexToAddress("0x9EB46ba1179259642706f03387ADC39470f64Cc8")
-		amount := *big.NewInt(1e18)
-		message := "oke"
-		signature := []byte("0x9EB46ba1179259642706f03387ADC39470f64Cc8")
-		contract.Signature(signer, to, &amount, message, initstate.Auth.Nonce, signature)
+		signer := common.HexToAddress("0xB273216C05A8c0D4F0a4Dd0d7Bae1D2EfFE636dd")
+		to := common.HexToAddress("0x14723A09ACff6D2A60DcdF7aA4AFf308FDDC160C")
+		amount := *big.NewInt(123)
+		message := "coffee and donuts"
+		signature := ([]byte)("0x993dab3dd91f5c6dc28e17439be475478f5635c92a56e17e82349d3fb2f166196f466c0b4e0c146f285204f0dcb13e5ae67bc33f4b888ec32dfe0a063e8f3f781b")
+		nonce := *big.NewInt(1)
+		contract.Signature(signer, to, &amount, message, &nonce, signature)
 	} else {
 
 		fmt.Println("Input Invalid!!! Please enter again.")

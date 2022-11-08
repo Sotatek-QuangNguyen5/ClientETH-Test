@@ -63,7 +63,7 @@ func ReceiverBalance(auth *bind.TransactOpts) {
 
 func Signature(signer common.Address, to common.Address, amount *big.Int, message string, nonce *big.Int, signature []byte) {
 
-    res, err := Mycontract.Verify(nil, signer, to, amount, message, nonce, signature)
+    res, err := Mycontract.Verify(&bind.CallOpts{}, signer, to, amount, message, nonce, signature)
     if err != nil {
         log.Fatal(err)
     }

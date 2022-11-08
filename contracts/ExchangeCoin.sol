@@ -23,7 +23,7 @@ contract VerifySignature {
 
     function getEthSignedMessageHash(bytes32 _messageHash) public pure returns(bytes32) {
         
-        return keccak256(abi.encodePacked("joker", _messageHash));
+        return keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", _messageHash));
     }
 
     function verify(address _signer, address _to, uint _amount, string memory _message, uint _nonce, bytes memory signature) public pure returns(bool) {
